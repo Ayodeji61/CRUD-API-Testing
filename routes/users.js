@@ -68,7 +68,7 @@ router.get('/:id', (req, res) => {
 // @desc    Update user
 // @access  Public
 router.put('/:id', (req, res) => {
-	let id = req.params.id;
+	let id = req.params._id;
 	var data = {
 		firstname: req.body.firstname,
 		lastname: req.body.lastname,
@@ -88,9 +88,8 @@ router.put('/:id', (req, res) => {
 // @route   DELETE user/:id
 // @access  Public
 router.delete('/:id', (req, res) => {
-	console.log(req.params.id);
-	let id = req.params.id;
-	User.remove(
+//	let id = req.params.id;
+	/*User.remove(
 		{
 			_id: id
 		},
@@ -98,7 +97,16 @@ router.delete('/:id', (req, res) => {
 			if (err) res.send(err);
 			else res.send('Successfully! User has been Deleted.');
 		}
-	);
+	); */
+
+	User.remove(
+		{ _id: req.body.id },
+		(err) => {
+			if (err) res.send(err);
+			else res.send('Successfully! User has been Deleted.');
+		}
+		)
+
 });
 
 module.exports = router;
